@@ -18,17 +18,17 @@ public class OneHundredMeters extends Competition {
 	@Override
 	public void start() {
 		int index = 0;
-		while (true) {
-			Runner runner = (Runner) getAthletes().get(index);
-			runner.run();
-			if (finished(runner.getPosition())) {
-				super.setWinner(runner);
-				break;
+		if (isValid()) {
+			while (true) {
+				Runner runner = (Runner) getAthletes().get(index);
+				runner.run();
+				if (finished(runner.getPosition())) {
+					super.setWinner(runner);
+					break;
+				}
+				if (index == (getAthletes().size() - 1)) index = 0;
+				else index++;
 			}
-			if (index == (getAthletes().size() - 1))
-				index = 0;
-			else
-				index++;
 		}
 	}
 

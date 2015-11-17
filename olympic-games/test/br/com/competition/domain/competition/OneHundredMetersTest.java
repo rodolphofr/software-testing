@@ -1,9 +1,10 @@
 package br.com.competition.domain.competition;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.competition.domain.Runner;
@@ -36,12 +37,6 @@ public class OneHundredMetersTest {
 		competition.getAthletes().remove(usain);
 	}
 	
-//	@Test
-//	public void shouldNotStartOneCompetition() {
-//		competition.start();
-//		assertNull(competition.getWinner());
-//	}
-	
 	@Test
 	public void shouldStartACompetition() {
 		competition.participate(usain);
@@ -51,8 +46,35 @@ public class OneHundredMetersTest {
 		competition.start();
 		
 		assertEquals(3, competition.getAthletes().size());
+	}
+	
+	@Test
+	public void shouldHaveAChampion() {
+		competition.participate(usain);
+		competition.participate(jardel);
+		competition.participate(madson);
+		
+		competition.start();
+		
 		assertEquals(usain, competition.getWinner());
 	}
 	
+	@Test
+	public void shouldNotStartOneCompetition() {
+		competition.start();
+		assertNull(competition.getWinner());
+	}
+	
+	@Ignore
+	@Test
+	public void shouldATie() {
+		competition.participate(jardel);
+		competition.participate(jardel);
+		competition.participate(jardel);
+		
+		competition.start();
+		
+		assertNull(competition.getWinner());
+	}
 
 }

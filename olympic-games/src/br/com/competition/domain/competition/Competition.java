@@ -8,6 +8,8 @@ import br.com.competition.domain.Athlete;
 
 public abstract class Competition {
 
+	/*TODO: Criar pódio*/
+	
 	private String description;
 	private Athlete winner;
 	private List<Athlete> athletes;
@@ -20,10 +22,11 @@ public abstract class Competition {
 	public void participate(Athlete athlete) {
 		this.athletes.add(athlete);
 	}
-
-	public abstract void start();
-	protected abstract boolean finished(int position);
 	
+	public boolean isValid() {
+		return athletes.size() > 1;
+	}
+
 	public List<Athlete> getAthletes() {
 		return Collections.unmodifiableList(athletes);
 	}
@@ -39,4 +42,7 @@ public abstract class Competition {
 	public void setWinner(Athlete winner) {
 		this.winner = winner;
 	}
+
+	public abstract void start();
+	protected abstract boolean finished(int position);
 }
