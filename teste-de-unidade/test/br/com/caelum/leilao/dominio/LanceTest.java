@@ -24,7 +24,7 @@ public class LanceTest {
 
 	@Test(expected=IllegalArgumentException.class)
 	public void naoDeveAceitarValoresNegativos() {
-		new Lance(usuario, -10);
+		new Lance(usuario, 10);
 	}
 
 	@Test
