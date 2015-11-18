@@ -1,5 +1,6 @@
 package br.com.competition.domain.competition;
 
+import br.com.competition.domain.Athlete;
 import br.com.competition.domain.Runner;
 
 public class OneHundredMeters extends Competition {
@@ -17,19 +18,23 @@ public class OneHundredMeters extends Competition {
 
 	@Override
 	public void start() {
-		int index = 0;
 		if (isValid()) {
-			while (true) {
-				Runner runner = (Runner) getAthletes().get(index);
-				runner.run();
-				if (finished(runner.getPosition())) {
-					super.setWinner(runner);
-					break;
+			while (!competitionEnded()) {
+				for (Athlete athlete : getCompetitors()) {
+					Runner runner = (Runner) athlete;
+					runner.run();
+					/*TODO: Refatorar condição */
+					if (finished(runner.getPosition()) && !contains(runner)) {
+						addClassification(runner);
+					}
 				}
-				if (index == (getAthletes().size() - 1)) index = 0;
-				else index++;
 			}
 		}
+	}
+
+	
+	private boolean contains(Runner runner) {
+		return getClassification().contains(runner);
 	}
 
 	@Override
