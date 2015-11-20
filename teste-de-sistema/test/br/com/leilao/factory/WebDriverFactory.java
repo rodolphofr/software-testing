@@ -8,7 +8,7 @@ import org.openqa.selenium.opera.OperaDriver;
 
 public class WebDriverFactory {
 	
-	private static final String DIR_PATH = "C:/Users/Yeda/teste-de-sistema/driver/";
+	private static final String DIR_PATH = System.getProperty("user.dir") + "/driver";
 	private static final String CHROME_DRIVER = DIR_PATH + "/chromedriver.exe";
 	private static final String DRIVER_NAME = "webdriver.chrome.driver";
 	

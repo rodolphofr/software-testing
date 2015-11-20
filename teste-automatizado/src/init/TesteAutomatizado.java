@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class TesteAutomatizado {
 	
-	private static final String DIR_PATH = "C:/Users/Yeda/teste-automatizado/lib/";
+	private static final String DIR_PATH = System.getProperty("user.dir") + "/lib";
 	private static final String CHROME_DRIVER = DIR_PATH + "/chromedriver.exe";
 	private static final String DRIVER_NAME = "webdriver.chrome.driver";
 	
