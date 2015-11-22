@@ -1,7 +1,10 @@
 package br.com.leilao.pgobjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class UsuariosPage {
 
@@ -25,5 +28,9 @@ public class UsuariosPage {
 		return driver.getPageSource().contains(name) && driver.getPageSource().contains(email);
 	}
 	
-	
+	public void excluiUltimoUsuarioCadastrado() {
+		List<WebElement> botoes = driver.findElements(By.tagName("button"));
+		botoes.get(botoes.size() - 1).click(); //pega e clica no botao do ultimo elemento inserido na lista
+		driver.switchTo().alert().accept();
+	}
 }

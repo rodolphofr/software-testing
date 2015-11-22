@@ -1,7 +1,7 @@
 package br.com.leilao.dominio;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -33,12 +33,9 @@ public class UsuarioTest {
 
 	@Test
 	public void deveCadastradorUsuario() {
-		String nome = "Xavier Toledo";
-		String email = "xavier@email.com.br";
-
+		String nome = "Xavier Toledo", email = "xavier@email.com.br";
 		usuariosPage.visita();
 		usuariosPage.novo().cadastra(nome, email);;
-		
 		assertTrue(usuariosPage.existeNaListagem(nome, email));
 	}
 	
@@ -56,4 +53,14 @@ public class UsuarioTest {
 		assertFalse(novoUsuarioPage.cadastrado());
 	}
 	
-}
+	@Test
+	public void deveExcluirUmUsuario() {
+		String nome = "usuario", email = "usuario@email.com";
+		
+		usuariosPage.novo().cadastra(nome, email);
+		assertTrue(usuariosPage.existeNaListagem(nome, email));
+		
+		usuariosPage.excluiUltimoUsuarioCadastrado();
+		assertFalse(usuariosPage.existeNaListagem(nome, email));
+	}
+} 
