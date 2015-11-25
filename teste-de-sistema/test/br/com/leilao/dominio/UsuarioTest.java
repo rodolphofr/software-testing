@@ -3,6 +3,8 @@ package br.com.leilao.dominio;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +37,8 @@ public class UsuarioTest {
 	public void deveCadastradorUsuario() {
 		String nome = "Xavier Toledo", email = "xavier@email.com.br";
 		usuariosPage.visita();
+		TestUtil.wait(driver);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		usuariosPage.novo().cadastra(nome, email);;
 		assertTrue(usuariosPage.existeNaListagem(nome, email));
 	}
@@ -42,6 +46,7 @@ public class UsuarioTest {
 	@Test
 	public void naoDeveCadastrarUsuarioSemNome() {
 		novoUsuarioPage.visita();
+		TestUtil.wait(driver);
 		novoUsuarioPage.cadastra("", "test@email.com");
 		assertFalse(novoUsuarioPage.cadastrado());
 	}
@@ -49,18 +54,22 @@ public class UsuarioTest {
 	@Test
 	public void naoDeveCadastrarUsuarioSemNomeEEmail() {
 		novoUsuarioPage.visita();
+		TestUtil.wait(driver);
 		novoUsuarioPage.cadastra(null, null);
 		assertFalse(novoUsuarioPage.cadastrado());
 	}
 	
 	@Test
-	public void deveExcluirUmUsuario() {
+	public void deveExcluirUmUsuario() throws InterruptedException {
 		String nome = "usuario", email = "usuario@email.com";
 		
+		usuariosPage.visita();
+		TestUtil.wait(driver);
 		usuariosPage.novo().cadastra(nome, email);
 		assertTrue(usuariosPage.existeNaListagem(nome, email));
 		
 		usuariosPage.excluiUltimoUsuarioCadastrado();
 		assertFalse(usuariosPage.existeNaListagem(nome, email));
 	}
+	
 } 
