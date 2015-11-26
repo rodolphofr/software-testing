@@ -24,8 +24,12 @@ public class UsuariosPage {
 		return new NovoUsuarioPage(driver);
 	}
 	
-	public boolean existeNaListagem(String name, String email) {
-		return driver.getPageSource().contains(name) && driver.getPageSource().contains(email);
+	public boolean existeNaListagem(String nome, String email) {
+		return driver.getPageSource().contains(nome) && driver.getPageSource().contains(email);
+	}
+	
+	public void editarUsuario(String email) {
+		driver.findElement(By.xpath("//tr[td//text()[contains(., '"+ email +"')]]/td[3]/a[2]")).click();
 	}
 	
 	public void excluiUltimoUsuarioCadastrado() {
