@@ -2,6 +2,7 @@ package br.com.leilao.pgobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class EditarUsuarioPage {
 	
@@ -12,9 +13,15 @@ public class EditarUsuarioPage {
 	}
 	
 	public void editar(String nome, String email) {
-		driver.findElement(By.name("usuario.nome")).sendKeys(nome);
-		driver.findElement(By.name("usuario.email")).sendKeys(email);
-		driver.findElement(By.xpath("//button='Salvar!'")).click();
+		WebElement nomeTxt = driver.findElement(By.name("usuario.nome"));
+		nomeTxt.clear();
+		nomeTxt.sendKeys(nome);
+		
+		WebElement emailTxt = driver.findElement(By.name("usuario.email"));
+		emailTxt.clear();
+		emailTxt.sendKeys(email);
+		
+		driver.findElement(By.xpath("//*[@id='btnSalvar']")).click();
 	}
 		
 	

@@ -1,21 +1,25 @@
 package br.com.leilao.dominio;
 
-import java.util.Date;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
+import java.util.Date;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 
+import br.com.leilao.dominio.cenario.Cenario;
 import br.com.leilao.factory.WebDriverFactory;
 import br.com.leilao.factory.WebDriverFactory.Browser;
-import br.com.leilao.pgobjects.NovoLeilaoPage;
 import br.com.leilao.pgobjects.LeiloesPage;
+import br.com.leilao.pgobjects.NovoLeilaoPage;
 import br.com.leilao.util.Util;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LeilaoTest {
 
 	private WebDriver driver;
@@ -24,9 +28,11 @@ public class LeilaoTest {
 	
 	@Before
 	public void setUp() {
-		this.driver = new WebDriverFactory().factory(Browser.FIREFOX);
+		this.driver = new WebDriverFactory().factory(Browser.GOOGLE_CHROME);
 		this.leiloesPage = new LeiloesPage(driver);
 		this.leilaoPage = new NovoLeilaoPage(driver);
+		Util.limparBaseDeDados();
+		new Cenario(driver).criaUsuario("Rodolpho Rodrigues", "rodolpho@email.com");
 	}
 	
 	@After
@@ -50,7 +56,7 @@ public class LeilaoTest {
 	public void naoDeveCadastrarLeilaoSemNomeOuValorInicial() {
 		leilaoPage.visita();
 		Util.wait(2000);
-		leilaoPage.cadastraLeilao("", 0, "Sandra Alencar", false);
+		leilaoPage.cadastraLeilao("", 0, "Rodolpho Rodrigues", false);
 		assertFalse(leilaoPage.cadastrado());
 	}
 	

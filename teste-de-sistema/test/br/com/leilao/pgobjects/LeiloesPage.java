@@ -3,6 +3,8 @@ package br.com.leilao.pgobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import br.com.leilao.dominio.base.URLBase;
+
 public class LeiloesPage {
 	
 	private WebDriver driver;
@@ -12,7 +14,7 @@ public class LeiloesPage {
 	}
 
 	public void visita() {
-		driver.get("http://localhost:8080/leiloes");
+		driver.get(new URLBase().getUrlBase() + "/leiloes");
 	}
 	
 	public NovoLeilaoPage novo() {
@@ -25,4 +27,10 @@ public class LeiloesPage {
 				driver.getPageSource().contains(usuario) &&
 				driver.getPageSource().contains(dataAbertura);
 	}
+	
+	public DetalhesDoLancePage detalhes(int posicao) {
+		driver.findElements(By.linkText("exibir")).get(posicao - 1).click();
+		return new DetalhesDoLancePage(driver);
+	}
+	
 }

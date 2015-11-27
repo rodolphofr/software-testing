@@ -4,17 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import br.com.leilao.dominio.base.URLBase;
+
 public class NovoUsuarioPage {
 	
 	private WebDriver driver;
-	private static final String CADASTRO_USUARIO_URL = "http://localhost:8080/usuarios/new";
 	
 	public NovoUsuarioPage(WebDriver driver) {
 		this.driver = driver;
 	}
 	
 	public void visita() {
-		driver.get(CADASTRO_USUARIO_URL);
+		driver.get(new URLBase().getUrlBase() + "/usuarios/new");
 	}
 	
 	public void cadastra(String nome, String email) {

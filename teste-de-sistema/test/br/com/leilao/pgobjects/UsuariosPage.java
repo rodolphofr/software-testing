@@ -6,17 +6,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import br.com.leilao.dominio.base.URLBase;
+
 public class UsuariosPage {
 
 	private WebDriver driver;
-	private static final String USUARIOS_URL = "http://localhost:8080/usuarios";
 	
 	public UsuariosPage(WebDriver driver) {
 		this.driver = driver;
 	}
 	
 	public void visita() {
-		driver.get(USUARIOS_URL);
+		driver.get(new URLBase().getUrlBase() + "/usuarios");
 	}
 	
 	public NovoUsuarioPage novo() {

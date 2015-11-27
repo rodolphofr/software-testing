@@ -24,13 +24,14 @@ public class UsuarioTest {
 	private UsuariosPage usuariosPage;
 	private NovoUsuarioPage novoUsuarioPage;
 	private EditarUsuarioPage editarUsuarioPage;
-	
+
 	@Before
 	public void init() {
-		this.driver = new WebDriverFactory().factory(Browser.FIREFOX);
+		this.driver = new WebDriverFactory().factory(Browser.GOOGLE_CHROME);
 		this.usuariosPage = new UsuariosPage(driver);
 		this.novoUsuarioPage = new NovoUsuarioPage(driver);
 		this.editarUsuarioPage = new EditarUsuarioPage(driver);
+		Util.limparBaseDeDados();
 	}
 	
 	@After
@@ -38,43 +39,43 @@ public class UsuarioTest {
 		this.driver.close();
 	}
 
-//	@Test
-//	public void deveCadastradorUsuario() {
-//		String nome = "Xavier Toledo", email = "xavier@email.com.br";
-//		usuariosPage.visita();
-//		Util.wait(2000);
-//		usuariosPage.novo().cadastra(nome, email);;
-//		assertTrue(usuariosPage.existeNaListagem(nome, email));
-//	}
-//	
-//	@Test
-//	public void naoDeveCadastrarUsuarioSemNome() {
-//		novoUsuarioPage.visita();
-//		Util.wait(2000);
-//		novoUsuarioPage.cadastra("", "test@email.com");
-//		assertFalse(novoUsuarioPage.cadastrado());
-//	}
-//	
-//	@Test
-//	public void naoDeveCadastrarUsuarioSemNomeEEmail() {
-//		novoUsuarioPage.visita();
-//		Util.wait(2000);
-//		novoUsuarioPage.cadastra(null, null);
-//		assertFalse(novoUsuarioPage.cadastrado());
-//	}
-//	
-//	@Test
-//	public void deveExcluirUmUsuario() {
-//		String nome = "usuario", email = "usuario@email.com";
-//		
-//		usuariosPage.visita();
-//		Util.wait(2000);
-//		usuariosPage.novo().cadastra(nome, email);
-//		assertTrue(usuariosPage.existeNaListagem(nome, email));
-//		
-//		usuariosPage.excluiUltimoUsuarioCadastrado();
-//		assertFalse(usuariosPage.existeNaListagem(nome, email));
-//	}
+	@Test
+	public void deveCadastradorUsuario() {
+		String nome = "Xavier Toledo", email = "xavier@email.com.br";
+		usuariosPage.visita();
+		Util.wait(2000);
+		usuariosPage.novo().cadastra(nome, email);
+		assertTrue(usuariosPage.existeNaListagem(nome, email));
+	}
+	
+	@Test
+	public void naoDeveCadastrarUsuarioSemNome() {
+		novoUsuarioPage.visita();
+		Util.wait(2000);
+		novoUsuarioPage.cadastra("", "test@email.com");
+		assertFalse(novoUsuarioPage.cadastrado());
+	}
+	
+	@Test
+	public void naoDeveCadastrarUsuarioSemNomeEEmail() {
+		novoUsuarioPage.visita();
+		Util.wait(2000);
+		novoUsuarioPage.cadastra(null, null);
+		assertFalse(novoUsuarioPage.cadastrado());
+	}
+	
+	@Test
+	public void deveExcluirUmUsuario() {
+		String nome = "usuario", email = "usuario@email.com";
+		
+		usuariosPage.visita();
+		Util.wait(2000);
+		usuariosPage.novo().cadastra(nome, email);
+		assertTrue(usuariosPage.existeNaListagem(nome, email));
+		
+		usuariosPage.excluiUltimoUsuarioCadastrado();
+		assertFalse(usuariosPage.existeNaListagem(nome, email));
+	}
 	
 	@Test
 	public void deveAlterarUmUsuario() {
@@ -84,10 +85,7 @@ public class UsuarioTest {
 		Util.wait(2000);
 		
 		novoUsuarioPage.cadastra(nome, email);
-		
-		assertTrue(novoUsuarioPage.cadastrado());
-		
-		usuariosPage.existeNaListagem(nome, email);
+		Util.wait(2000);
 		
 		usuariosPage.editarUsuario(email);
 		Util.wait(2000);

@@ -3,6 +3,11 @@ package br.com.leilao.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.openqa.selenium.WebDriver;
+
+import br.com.leilao.factory.WebDriverFactory;
+import br.com.leilao.factory.WebDriverFactory.Browser;
+
 public class Util {
 	
 	public static String format(Date date) {
@@ -16,5 +21,11 @@ public class Util {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void limparBaseDeDados() {
+		WebDriver driver = new WebDriverFactory().factory(Browser.FIREFOX);
+		driver.get("http://localhost:8080/apenas-teste/limpa");
+		driver.close();
 	}
 }

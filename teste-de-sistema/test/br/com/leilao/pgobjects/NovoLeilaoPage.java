@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import br.com.leilao.dominio.base.URLBase;
+
 public class NovoLeilaoPage {
 
 	private WebDriver driver;
@@ -13,7 +15,7 @@ public class NovoLeilaoPage {
 	}
 	
 	public void visita() {
-		driver.get("http://localhost:8080/leiloes/new");
+		driver.get(new URLBase().getUrlBase() + "/leiloes/new");
 	}
 	
 	public void cadastraLeilao(String nome, double valor, String usuario, boolean ehUsado) {
