@@ -4,7 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.opera.OperaDriver;
+
+import br.com.leilao.dominio.Browser;
 
 public class WebDriverFactory {
 	
@@ -13,25 +14,23 @@ public class WebDriverFactory {
 	private static final String DRIVER_NAME = "webdriver.chrome.driver";
 	
 	public WebDriver factory(Browser browser) {
-		System.setProperty(DRIVER_NAME, CHROME_DRIVER);
 		switch (browser) {
 		case FIREFOX:
 			return new FirefoxDriver();
-		case GOOGLE_CHROME:
+		case CHROME:
+			System.setProperty(DRIVER_NAME, CHROME_DRIVER);
 			return new ChromeDriver(); 
 		case INTERNET_EXPLORER:
 			return new InternetExplorerDriver();
-		case OPERA:
-			return new OperaDriver();
 		default:
 			return null;
 		}
 	}
 
-	public enum Browser {
-		FIREFOX, 
-		GOOGLE_CHROME, 
-		INTERNET_EXPLORER,
-		OPERA;
+	protected static void fechar(WebDriver driver) { 
+		if (driver != null) {
+			driver.close();
+		}
 	}
+	
 }

@@ -11,7 +11,6 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 
 import br.com.leilao.factory.WebDriverFactory;
-import br.com.leilao.factory.WebDriverFactory.Browser;
 import br.com.leilao.pgobjects.EditarUsuarioPage;
 import br.com.leilao.pgobjects.NovoUsuarioPage;
 import br.com.leilao.pgobjects.UsuariosPage;
@@ -26,8 +25,8 @@ public class UsuarioTest {
 	private EditarUsuarioPage editarUsuarioPage;
 
 	@Before
-	public void init() {
-		this.driver = new WebDriverFactory().factory(Browser.GOOGLE_CHROME);
+	public void setUp() {
+		this.driver = new WebDriverFactory().factory(Browser.FIREFOX);
 		this.usuariosPage = new UsuariosPage(driver);
 		this.novoUsuarioPage = new NovoUsuarioPage(driver);
 		this.editarUsuarioPage = new EditarUsuarioPage(driver);
@@ -36,7 +35,7 @@ public class UsuarioTest {
 	
 	@After
 	public void finaliza() {
-		this.driver.close();
+		driver.close();
 	}
 
 	@Test

@@ -14,7 +14,6 @@ import org.openqa.selenium.WebDriver;
 
 import br.com.leilao.dominio.cenario.Cenario;
 import br.com.leilao.factory.WebDriverFactory;
-import br.com.leilao.factory.WebDriverFactory.Browser;
 import br.com.leilao.pgobjects.LeiloesPage;
 import br.com.leilao.pgobjects.NovoLeilaoPage;
 import br.com.leilao.util.Util;
@@ -28,7 +27,7 @@ public class LeilaoTest {
 	
 	@Before
 	public void setUp() {
-		this.driver = new WebDriverFactory().factory(Browser.GOOGLE_CHROME);
+		this.driver = new WebDriverFactory().factory(Browser.FIREFOX);
 		this.leiloesPage = new LeiloesPage(driver);
 		this.leilaoPage = new NovoLeilaoPage(driver);
 		Util.limparBaseDeDados();
