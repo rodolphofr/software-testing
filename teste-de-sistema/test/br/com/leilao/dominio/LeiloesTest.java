@@ -25,7 +25,7 @@ public class LeiloesTest {
 	public void setUp() {
 		this.driver = new WebDriverFactory().factory(Browser.FIREFOX);
 		this.leiloesPage = new LeiloesPage(driver);
-		Util.limparBaseDeDados();
+		Util.limparBaseDeDados(driver);
 		Util.wait(5000);
 		new Cenario(driver)
 				.criaUsuario("Cris Zena", "criz@opa.com")

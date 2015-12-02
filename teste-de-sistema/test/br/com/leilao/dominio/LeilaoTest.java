@@ -30,7 +30,7 @@ public class LeilaoTest {
 		this.driver = new WebDriverFactory().factory(Browser.FIREFOX);
 		this.leiloesPage = new LeiloesPage(driver);
 		this.leilaoPage = new NovoLeilaoPage(driver);
-		Util.limparBaseDeDados();
+		Util.limparBaseDeDados(driver);
 		new Cenario(driver).criaUsuario("Rodolpho Rodrigues", "rodolpho@email.com");
 	}
 	
@@ -48,7 +48,7 @@ public class LeilaoTest {
 		leilaoPage.cadastraLeilao(nome, 123.00, usuario, true);
 		
 		assertTrue(leilaoPage.cadastrado());
-		assertTrue(leiloesPage.existeLeilaoCadastrado(nome, usuario, Util.format(new Date())));
+		assertTrue(leiloesPage.existeLeilaoCadastrado(nome, usuario, Util.formatDate(new Date())));
 	}
 	
 	@Test

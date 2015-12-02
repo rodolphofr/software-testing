@@ -30,7 +30,7 @@ public class UsuarioTest {
 		this.usuariosPage = new UsuariosPage(driver);
 		this.novoUsuarioPage = new NovoUsuarioPage(driver);
 		this.editarUsuarioPage = new EditarUsuarioPage(driver);
-		Util.limparBaseDeDados();
+		Util.limparBaseDeDados(driver);
 	}
 	
 	@After
