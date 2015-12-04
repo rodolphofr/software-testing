@@ -41,11 +41,8 @@ public class EncerradorDeLeilaoTest {
 	
 	@Test
 	public void deveEncerrarLeiloesAntigos() {
-		Calendar dataAntiga = Calendar.getInstance();
-		dataAntiga.set(1990, 5, 21);
-		
-		Leilao leilao1 = criador.para("Geladeira Usada").naData(dataAntiga).constroi();
-		Leilao leilao2 = criador.para("Notebook Novo").naData(dataAntiga).constroi();
+		Leilao leilao1 = criador.para("Geladeira Usada").naData(antiga()).constroi();
+		Leilao leilao2 = criador.para("Notebook Novo").naData(antiga()).constroi();
 		
 		List<Leilao> leiloes = Arrays.asList(leilao1, leilao2);
 		
@@ -86,15 +83,26 @@ public class EncerradorDeLeilaoTest {
 	
 	@Test
 	public void deveAtualizarLeilao() {
-		Calendar dataAntiga = Calendar.getInstance();
-		dataAntiga.set(1990, 5, 21);
-		
-		Leilao leilao = criador.para("Celular Novo").naData(dataAntiga).constroi();
+		Leilao leilao = criador.para("Celular Novo").naData(antiga()).constroi();
 		when(dao.correntes()).thenReturn(Arrays.asList(leilao));
 		
 		encerrador.encerra();
 		
 		verify(dao, times(1)).atualiza(leilao);
+	}
+	
+	@Test
+	public void deveLancarExcecaoQuandoDaoFalhar() {
+		Leilao leilao1 = criador.para("Telefone").naData(antiga()).constroi();
+		Leilao leilao2 = criador.para("Computador").naData(antiga()).constroi();
+		
+		when(dao.correntes()).thenReturn(Arrays.asList(leilao1, leilao2));
+		doThrow(new RuntimeException()).when(dao).atualiza(leilao1);
+		
+		encerrador.encerra();
+		
+		verify(dao).atualiza(leilao1);
+		verify(dao, timeout(0)).atualiza(leilao1);
 	}
 	
 	private Calendar ontem() {
@@ -103,4 +111,9 @@ public class EncerradorDeLeilaoTest {
 		return calendar;
 	}
 
+	private Calendar antiga() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(1990, 5, 21);
+		return calendar;
+	}
 }
