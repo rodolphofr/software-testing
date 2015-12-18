@@ -1,4 +1,4 @@
-package br.com.leilao.dominio.cenario;
+package br.com.leilao.dominio;
 
 import org.openqa.selenium.WebDriver;
 

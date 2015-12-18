@@ -1,4 +1,4 @@
-package br.com.leilao.dominio.base;
+package br.com.leilao.dominio;
 
 public class URLBase {
 

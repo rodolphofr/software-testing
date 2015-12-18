@@ -3,7 +3,7 @@ package br.com.leilao.pgobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import br.com.leilao.dominio.base.URLBase;
+import br.com.leilao.dominio.URLBase;
 
 public class LeiloesPage {
 	

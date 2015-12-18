@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import br.com.leilao.dominio.base.URLBase;
+import br.com.leilao.dominio.URLBase;
 
 public class NovoLeilaoPage {
 
