@@ -1,4 +1,4 @@
-package br.com.caelum.leilao.infra.dao;
+package br.com.caelum.leilao.infra.repositorios;
 
 import java.util.List;
 

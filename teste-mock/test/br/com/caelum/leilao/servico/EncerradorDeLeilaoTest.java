@@ -3,7 +3,15 @@ package br.com.caelum.leilao.servico;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.timeout;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,8 +26,8 @@ import org.mockito.InOrder;
 
 import br.com.caelum.leilao.builder.CriadorDeLeilao;
 import br.com.caelum.leilao.dominio.Leilao;
-import br.com.caelum.leilao.infra.dao.EnviadorDeEmail;
-import br.com.caelum.leilao.infra.dao.RepositorioLeiloes;
+import br.com.caelum.leilao.infra.carteiro.Carteiro;
+import br.com.caelum.leilao.infra.repositorios.RepositorioLeiloes;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EncerradorDeLeilaoTest {
@@ -27,13 +35,13 @@ public class EncerradorDeLeilaoTest {
 	private RepositorioLeiloes dao;
 	private CriadorDeLeilao criador;
 	private EncerradorDeLeilao encerrador;
-	private EnviadorDeEmail carteiro;
+	private Carteiro carteiro;
 	private InOrder inOrder;
 
 	@Before
 	public void setUp() {
 		dao = mock(RepositorioLeiloes.class);
-		carteiro = mock(EnviadorDeEmail.class);
+		carteiro = mock(Carteiro.class);
 		criador = new CriadorDeLeilao();
 		encerrador = new EncerradorDeLeilao(dao, carteiro);
 		inOrder = inOrder(dao, carteiro);

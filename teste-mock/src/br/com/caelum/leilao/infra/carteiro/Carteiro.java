@@ -1,4 +1,4 @@
-package br.com.caelum.leilao.infra.dao;
+package br.com.caelum.leilao.infra.carteiro;
 
 import br.com.caelum.leilao.dominio.Leilao;
 
