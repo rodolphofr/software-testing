@@ -11,20 +11,38 @@ public class TesteAutomatizado {
 	private static final String CHROME_DRIVER = DIR_PATH + "/chromedriver.exe";
 	private static final String DRIVER_NAME = "webdriver.chrome.driver";
 	
-	public static void main(String[] args) {
-		System.setProperty(DRIVER_NAME, CHROME_DRIVER); //necessário para importar o driver do chrome
-		
-		WebDriver driver = getChromeDriver(); //driver responsável pelo firefox (abre navegador)
-		
-		driver.get("http://www.google.com.br/"); //url que deseja acessar pelo browser
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty(DRIVER_NAME, CHROME_DRIVER); 
 
-		WebElement element = driver.findElement(By.name("q")); //digita no campo com nome "q"
-		element.sendKeys("caelum");
+		WebDriver driver = getFirefoxDriver();  
+		driver.manage().window().maximize(); //fullscreen
 		
-		element.submit();
+		driver.get("http://www.google.com.br/"); 
+	
+		WebElement campoDePesquisa = driver.findElement(By.name("q"));
+		
+		Thread.sleep(2000);
+
+		campoDePesquisa.sendKeys("Lucas Pagliuca");
+		
+		Thread.sleep(1000);
+		
+		campoDePesquisa.submit();
+		
+		Thread.sleep(1000);
+		
+		WebElement linkLucas = driver.findElement(By.linkText("Lucas Pagliuca Profiles | Facebook"));
+		linkLucas.click();
+		
+		Thread.sleep(10000);
+		
+		WebElement linkLucasFacebook = driver.findElement(By.xpath(".//*[@id='all_search_results']/div[1]/div[1]/div/div/a/img"));
+		linkLucasFacebook.click();
+		
+		System.out.println("ESSA PORRA FUNCIONA!!!");
 	}
 	
-	public static WebDriver getFirefoxDrive() {
+	public static WebDriver getFirefoxDriver() {
 		return new FirefoxDriver();
 	}
 	
